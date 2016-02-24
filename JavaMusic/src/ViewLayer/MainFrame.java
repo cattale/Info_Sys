@@ -21,7 +21,7 @@ public class MainFrame extends BaseFrame
 {
 
     private Rent RentSelected=null;
-    private Client ClientSelected=null;
+    Client ClientSelected=null;
     private ArrayList<Rent> EventList=new ArrayList<>();
     private ArrayList<Client> ClientList=new ArrayList<>();
     

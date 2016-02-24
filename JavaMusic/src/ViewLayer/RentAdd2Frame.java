@@ -80,18 +80,19 @@ public class RentAdd2Frame extends BaseFrame
         int i=0;
 
 
-        for(Subject r: sessionAPI.getFreeSubject(Start, End))
+        for(Subject r: sessionAPI.getSubject(Start, End))
         {
 
             Object [] Tmp;
 
-            Tmp=new Object[5];
+            Tmp=new Object[6];
 
             Tmp[0]=i+1;
             Tmp[1]=r.getId();
             Tmp[2]=r.getType();
             Tmp[3]=r.getOwner();
             Tmp[4]=r.GetHourFee();
+            Tmp[5]= r.state == 0 ? "Свободен"  : r.state == 1 ? "Забронирован" : "Занят";
 
             TableFiller(this.AssociatedRentsTable, i, Tmp);
             i++;
@@ -117,20 +118,24 @@ public class RentAdd2Frame extends BaseFrame
 
         AssociatedRentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "№", "Id", "Тип", "Собственник", "Плата"
+                "№", "Id", "Тип", "Собственник", "Плата", "Состояние"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -143,7 +148,7 @@ public class RentAdd2Frame extends BaseFrame
         });
         jScrollPane2.setViewportView(AssociatedRentsTable);
 
-        jLabel14.setText("Аренда:");
+        jLabel14.setText("Ассоциированные ренты:");
 
         SaveEventButton.setText("Сохранить");
         SaveEventButton.addActionListener(new java.awt.event.ActionListener() {
@@ -185,14 +190,14 @@ public class RentAdd2Frame extends BaseFrame
                                 .addGap(130, 130, 130)))))
                 .addGap(0, 272, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
+                .addGap(315, 315, 315)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(311, 311, 311)
                         .addComponent(ToListButton)
                         .addGap(38, 38, 38)
                         .addComponent(SaveEventButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(365, 365, 365)
+                        .addGap(54, 54, 54)
                         .addComponent(ToPreviousStep)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -204,14 +209,14 @@ public class RentAdd2Frame extends BaseFrame
                 .addGap(31, 31, 31)
                 .addComponent(jLabel14)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ToListButton)
                     .addComponent(SaveEventButton))
                 .addGap(18, 18, 18)
                 .addComponent(ToPreviousStep)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addGap(59, 59, 59))
         );
 
         pack();

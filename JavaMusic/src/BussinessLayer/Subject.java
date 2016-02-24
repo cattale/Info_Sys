@@ -29,6 +29,7 @@ public class Subject extends SessionObject
     private String Owner=null;
     private Integer HourFee=null;
     private SubjectType Type=null;
+    public int state = 0;
 
     public Subject(Integer Id, String Owner, Integer HourFee, SubjectType Type) 
     {
@@ -76,6 +77,38 @@ public class Subject extends SessionObject
     {
         return (potentialHourFee>0);
     };
+    
+    public int state(Date Start, Date End) throws SQLException {
+        RentMapper HM=new RentMapper();
+        
+        ArrayList<Rent> AllRents=HM.findAllRents();
+        int Result = 0;
+        for (Rent H: AllRents)
+        {
+            for(Subject q: H.getItems())
+            {
+                if (this.getId()==q.getId())
+                {
+                    Long As=Start.getTime();
+                    Long Ae=End.getTime();
+                    
+                    Long Bs=H.getStart().getTime();
+                    Long Be=H.getEnd().getTime();
+                    boolean paid = H.isPaid();
+                    
+                    if (((Bs<=As)&&(Be<=Ae)&&(Be>As))||
+                            ((Bs<=As)&&(Be>=Ae))||
+                            ((As<=Bs)&&(Ae<=Be)&&(Ae>Bs))||
+                            ((As<=Bs)&&(Ae>=Be))){
+                        
+                        Result=paid ? 2: 1;
+                    }
+                };
+                
+            };
+        };
+        return Result;
+    }
     
     public boolean isFree(Date Start, Date End) throws SQLException
     {

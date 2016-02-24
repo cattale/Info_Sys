@@ -32,13 +32,13 @@ public class RegistryBA
         
         dumpRent.add(new Rent(1,"h",new Staff(1, "A", "B", "C", Staff.StaffType.менеджер),
                           new Client(1, "D", "E", "F"),
-                          new Date(2014,9,11), new Date(2014,9,12), SubjectList1));
+                          new Date(2014,9,11), new Date(2014,9,12), SubjectList1, false));
         dumpRent.add(new Rent(2,"hh",new Staff(2, "G", "H", "K", Staff.StaffType.менеджер),
                           new Client(2, "L", "M", "N"),
-                          new Date(2014,9,11), new Date(2014,9,13), SubjectList2));
+                          new Date(2014,9,11), new Date(2014,9,13), SubjectList2, false));
         dumpRent.add(new Rent(3,"hhh", new Staff(3, "O", "P", "R", Staff.StaffType.менеджер),
                           new Client(2, "S", "T", "Q"),
-                          new Date(2014,9,17), new Date(2014,9,21), SubjectList3));
+                          new Date(2014,9,17), new Date(2014,9,21), SubjectList3, false));
         
         return dumpRent;
     };

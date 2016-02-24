@@ -24,7 +24,10 @@ public class API
         return CurrentUser;
     };
     
-    
+    public boolean subjectAtDate(Subject subject, Date date){
+        //new SubjectMapper().
+        return false;
+    }
     public boolean Login(String Name, String Password) throws SQLException
     {
         StaffMapper FM=new StaffMapper();
@@ -102,7 +105,9 @@ public class API
             HM.Delete(deletedRent);
         };
     };
-    
+    public void changeRentPaid(int id, boolean paid) throws SQLException{
+        (new RentMapper()).changePaid(id, paid);
+    }
     public Integer createRent(Integer ClientId, Date Start, Date End,
                                         String Name, ArrayList<Subject> Items) throws SQLException, ClassNotFoundException
     {
@@ -118,7 +123,7 @@ public class API
             if (tmpClient==null) return null;
             
             RentMapper HM=new RentMapper();
-            Integer res=HM.Insert(new Rent(null, Name, CurrentUser, tmpClient, Start, End, Items));
+            Integer res=HM.Insert(new Rent(null, Name, CurrentUser, tmpClient, Start, End, Items, false));
             return res;
         }
         
@@ -148,6 +153,36 @@ public class API
                 {
                     reall.add(q);
                 };
+            };
+            
+            return  reall;
+        }
+        
+    };
+    
+    public ArrayList<Subject> getSubject(Date Start, Date End) throws SQLException
+    {
+        if (CurrentUser==null)
+        {
+            return null;
+        }
+        else
+        {
+            SubjectMapper QM=new SubjectMapper();
+            
+            ArrayList<Subject> tmpRes= QM.findAllSubject();
+            
+            if (tmpRes.isEmpty())
+            {
+                return null;
+            };
+            ArrayList<Subject> reall=new ArrayList<>();
+            
+            for (Subject q: tmpRes)
+            {
+                
+                q.state = q.state(Start, End);
+                reall.add(q);
             };
             
             return  reall;

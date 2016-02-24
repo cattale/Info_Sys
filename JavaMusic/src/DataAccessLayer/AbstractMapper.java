@@ -15,7 +15,7 @@ import java.util.Map;
 
 public abstract class AbstractMapper 
 {
-    protected static String Host = "jdbc:derby://localhost:1527/RentDB";
+    protected static String Host = "jdbc:derby://localhost:1527/Base";
     protected static String Name = "ivan";
     protected static String Pass= "ivan";
     

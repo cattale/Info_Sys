@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SubjectMapper extends AbstractMapper
 {
@@ -19,6 +20,30 @@ public class SubjectMapper extends AbstractMapper
     {
         super();
     };
+    
+    class MyDate extends SessionObject{
+        public Date start;
+        public Date finish;
+        public boolean paid;
+
+        public MyDate(Integer Id) {
+            super(Id);
+        }
+    }
+    
+    public boolean getAllDateOfSubject(Subject subject, Date date) throws SQLException{
+        String ask = "SELECT RENT.START, RENT.FINISH, RENT.PAID FROM SUBJECT JOIN" +  
+            "MHAT ON SUBJECT.PK = MHAT.FK_H JOIN" + 
+            "RENT ON MHAT.FK_M = RENT.PK" +
+            "WHERE SUBJECT.PK = " + subject.getId();
+        ArrayList<SessionObject> Result= DomainObjectsFind(ask);
+        
+        for (SessionObject o: Result) {
+            MyDate d = (MyDate) o;
+        }
+        
+        return false;
+    }
         
     @Override
     protected SessionObject load(ResultSet rs) throws SQLException 

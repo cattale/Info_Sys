@@ -5,6 +5,7 @@ public class Staff extends Man
     public enum StaffType
     {
         администратор,
+        финдиректор,
         менеджер
     };
 

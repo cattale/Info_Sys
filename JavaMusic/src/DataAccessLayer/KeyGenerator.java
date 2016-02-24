@@ -15,7 +15,7 @@ import java.util.List;
 public class KeyGenerator
 {
     
-    protected static String Host = "jdbc:derby://localhost:1527/RentDB";
+    protected static String Host = "jdbc:derby://localhost:1527/Base";
     protected static String Name = "ivan";
     protected static String Pass= "ivan";
     

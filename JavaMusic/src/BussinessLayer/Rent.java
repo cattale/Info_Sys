@@ -10,11 +10,12 @@ public class Rent extends SessionObject
     private Client Orderer;
     private Date Start;
     private Date End;
+    private boolean paid;
     private ArrayList<Subject> Items=new ArrayList<>();
     
-
+    
     public Rent(Integer Id, String Name, Staff Worker, Client Orderer, Date Start, 
-            Date End, ArrayList<Subject> Items) 
+            Date End, ArrayList<Subject> Items, boolean paid) 
     {
         super(Id);
         
@@ -31,7 +32,20 @@ public class Rent extends SessionObject
         
         if(Items!=null)
         this.Items.addAll(Items);
+        this.paid = paid;
     };
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
+    }
+    
+    public void changePaid() {
+        paid = ! paid;
+    }
     
     public String getName()
     {

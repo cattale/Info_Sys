@@ -105,6 +105,7 @@ public class LoginFrame extends BaseFrame
         catch(SQLException e)
         {
             JOptionPane.showMessageDialog(null, "Ошибка работы с базой данных.");
+            e.printStackTrace();
             return;
             
         };

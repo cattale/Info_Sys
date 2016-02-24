@@ -32,7 +32,10 @@ public class RentMapper extends AbstractMapper
         
         if (!AllIdentitiesMap.containsKey(rs.getInt("PK")))
         {
-            Result=new Rent(rs.getInt("PK"),rs.getString("Name"), null, null, new Date(rs.getTimestamp("Start").getTime()), new Date(rs.getTimestamp("Finish").getTime()), null);
+            Result=new Rent(rs.getInt("PK"),rs.getString("Name"), null, null, 
+                    new Date(rs.getTimestamp("Start").getTime()), 
+                    new Date(rs.getTimestamp("Finish").getTime()), null, 
+                    rs.getBoolean("Paid"));
             
             
             String Ask="SELECT * FROM MHAT WHERE FK_H="+Result.getId().toString();
@@ -90,7 +93,14 @@ public class RentMapper extends AbstractMapper
 
         return (SessionObject)Result;
     };
-    
+    public void changePaid(int id, boolean paid) throws SQLException {
+        String ask = "UPDATE RENT SET PAID = " + paid + " WHERE PK = " + id;
+        System.out.println(ask);
+        stmt.execute(ask);
+        //stmt.executeQuery("SELECT * FROM RENT");
+        
+        con.commit();
+    }
     public ArrayList<Rent> findAllRents() throws SQLException
     {
         ArrayList<SessionObject> Result= DomainObjectsFind("SELECT * FROM RENT");
